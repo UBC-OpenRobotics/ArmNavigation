@@ -9,7 +9,7 @@ from tf.transformations import euler_from_quaternion, quaternion_from_euler
 
 
 def goToPoint(Coord):
-    rospy.loginfo(rospy.get_caller_id() + "I heard x: %f, y: %f, z: %f", Coord.x, Coord.y, Coord.z)
+    rospy.loginfo(rospy.get_caller_id() + "I heard x: %d, y: %d, z: %d", Coord.x, Coord.y, Coord.z)
 
     target_pose = PoseStamped()
     target_pose.header.frame_id = 'base_footprint'
@@ -24,7 +24,7 @@ def goToPoint(Coord):
     target_pose.pose.orientation.z = 0.0
     target_pose.pose.orientation.w = 1.0
     '''
-    
+
     right_arm.set_pose_target(target_pose, end_effector_link)
 
     right_arm.go()
