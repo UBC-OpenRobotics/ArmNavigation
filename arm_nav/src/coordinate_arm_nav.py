@@ -11,6 +11,16 @@ from tf.transformations import euler_from_quaternion, quaternion_from_euler
 def goToPoint(Coord):
     rospy.loginfo(rospy.get_caller_id() + "I heard x: %d, y: %d, z: %d", Coord.x, Coord.y, Coord.z)
 
+    # See Main function for comments
+    arm = moveit_commander.MoveGroupCommander('arm')
+    end_effector_link = arm.get_end_effector_link()
+    reference_frame = 'base_link'
+    arm.set_pose_reference_frame(reference_frame)
+    arm.allow_replanning(True)
+    #Didn't know how to pass arm through the the subscriber function
+    #because callback was invoked by ROS
+
+    #Creates target pose based on reference 
     target_pose = PoseStamped()
     target_pose.header.frame_id = 'base_footprint'
     target_pose.header.stamp = rospy.Time.now()
@@ -25,15 +35,15 @@ def goToPoint(Coord):
     target_pose.pose.orientation.w = 1.0
     '''
 
-    right_arm.set_pose_target(target_pose, end_effector_link)
-
-    right_arm.go()
+    #Setting and going to set pose
+    arm.set_pose_target(target_pose, end_effector_link)
+    arm.go()
     
 def listener():
 
-    rospy.init_node('arm_coord_listener', anonymous=True)
+    rospy.init_node('arm_coordinate_listener', anonymous=True)
 
-    rospy.Subscriber("arm_coord",Point, goToPoint)
+    rospy.Subscriber("arm_coordinate",Point, goToPoint)
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
