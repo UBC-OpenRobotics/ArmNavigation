@@ -9,7 +9,8 @@ from tf.transformations import euler_from_quaternion, quaternion_from_euler
 
 
 def goToPoint(Coord):
-    rospy.loginfo(rospy.get_caller_id() + "I heard x: %d, y: %d, z: %d", Coord.x, Coord.y, Coord.z)
+    rospy.loginfo(rospy.get_caller_id() + " I heard \n%s", Coord)
+    rospy.loginfo(Coord.z)
 
     # See Main function for comments
     arm = moveit_commander.MoveGroupCommander('arm')
@@ -27,8 +28,8 @@ def goToPoint(Coord):
     target_pose.pose.position.x = Coord.x
     target_pose.pose.position.y = Coord.y
     target_pose.pose.position.z = Coord.z
-    
-    ''' Gripper Orientation 
+    '''
+    #Gripper Orientation 
     target_pose.pose.orientation.x = 0.0
     target_pose.pose.orientation.y = 0.0
     target_pose.pose.orientation.z = 0.0
@@ -39,11 +40,12 @@ def goToPoint(Coord):
     arm.set_pose_target(target_pose, end_effector_link)
     arm.go()
     
+
 def listener():
 
-    rospy.init_node('arm_coordinate_listener', anonymous=True)
+    #rospy.init_node('arm_coordinate_listener', anonymous=True)
 
-    rospy.Subscriber("arm_coordinate",Point, goToPoint)
+    rospy.Subscriber("arm_coordinate", Point, goToPoint)
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
@@ -53,7 +55,7 @@ if __name__ == '__main__':
     # Initialize the move_group API
     moveit_commander.roscpp_initialize(sys.argv)
         
-    rospy.init_node('moveit_demo')
+    rospy.init_node('arm_coordinate_listener')
                 
     # Initialize the move group for the right arm
     arm = moveit_commander.MoveGroupCommander('arm')
