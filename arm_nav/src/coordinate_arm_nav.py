@@ -10,20 +10,23 @@ from tf.transformations import euler_from_quaternion, quaternion_from_euler
 
 def goToPoint(Coord):
     rospy.loginfo(rospy.get_caller_id() + " I heard \n%s", Coord)
-    rospy.loginfo(Coord.z)
 
     # See Main function for comments
     arm = moveit_commander.MoveGroupCommander('arm')
     end_effector_link = arm.get_end_effector_link()
+    arm.set_goal_orientation_tolerance(3)
     reference_frame = 'base_link'
     arm.set_pose_reference_frame(reference_frame)
     arm.allow_replanning(True)
     #Didn't know how to pass arm through the the subscriber function
     #because callback was invoked by ROS
 
+    arm.set_named_target('resting')
+    arm.go()
+
     #Creates target pose based on reference 
     target_pose = PoseStamped()
-    target_pose.header.frame_id = 'base_footprint'
+    target_pose.header.frame_id = reference_frame
     target_pose.header.stamp = rospy.Time.now()
     target_pose.pose.position.x = Coord.x
     target_pose.pose.position.y = Coord.y
@@ -55,7 +58,7 @@ if __name__ == '__main__':
     # Initialize the move_group API
     moveit_commander.roscpp_initialize(sys.argv)
         
-    rospy.init_node('arm_coordinate_listener')
+    rospy.init_node('arm_coordinate_listener', anonymous=True)
                 
     # Initialize the move group for the right arm
     arm = moveit_commander.MoveGroupCommander('arm')

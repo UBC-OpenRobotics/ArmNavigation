@@ -1,0 +1,7 @@
+<launch>
+
+    <arg name="simulation" default="false"/>
+
+    <include file="$(find turtlebot_arm_bringup)/launch/arm.launch" pass_all_args="true"/>
+    <include file="$(find turtlebot_arm_moveit_config)/launch/move_group.launch"/>
+</launch>
