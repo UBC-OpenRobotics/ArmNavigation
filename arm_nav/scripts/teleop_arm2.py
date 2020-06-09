@@ -16,42 +16,42 @@ def leftKey(event):
     arm.shift_pose_target(0, -0.05, end_effector_link)
     arm.go()
     print "Shifted Left"
-    rospy.sleep(1)
+    #rospy.sleep(1)
 
 def rightKey(event):
     print "Right key pressed"
     arm.shift_pose_target(0, 0.05, end_effector_link)
     arm.go()
     print "Shifted Right"
-    rospy.sleep(1)
+    #rospy.sleep(1)
 
 def upKey(event):
     print "Up key pressed"
     arm.shift_pose_target(2, 0.05, end_effector_link)
     arm.go()
     print "Shifted Up"
-    rospy.sleep(1)
+    #rospy.sleep(1)
     
 def downKey(event):
     print "Down key pressed"
     arm.shift_pose_target(2, -0.05, end_effector_link)
     arm.go()
     print "Shifted Down"
-    rospy.sleep(1)
+    #rospy.sleep(1)
 
 def forwardKey(event):
     print "F key pressed"
     arm.shift_pose_target(1, 0.05, end_effector_link)
     arm.go()
     print "Shifted Forward"
-    rospy.sleep(1)
+    #rospy.sleep(1)
 
 def backwardKey(event):
     print "B key pressed"
     arm.shift_pose_target(1, -0.05, end_effector_link)
     arm.go()
     print "Shifted Backwards"
-    rospy.sleep(1)
+    #rospy.sleep(1)
 
 if __name__ == '__main__':
 
@@ -60,6 +60,8 @@ if __name__ == '__main__':
     frame.bind('<Right>', rightKey)
     frame.bind('<Up>', upKey)
     frame.bind('<Down>', downKey)
+    frame.bind('f', forwardKey)
+    frame.bind('b', backwardKey)
     frame.focus_set()
     frame.pack()
 
