@@ -5,6 +5,7 @@ from moveit_msgs.msg import RobotTrajectory
 from trajectory_msgs.msg import JointTrajectoryPoint
 
 from geometry_msgs.msg import PoseStamped, Pose
+from std_msgs.msg import String
 from tf.transformations import euler_from_quaternion, quaternion_from_euler
 
 def wave():
@@ -19,21 +20,29 @@ def resting():
     arm.set_named_target('resting')
     arm.go()
 
+def pickup():
+    x=0
+    y=0.2
+    z=0.45
+    pub = rospy.Publisher('arm_coordinate', Point, queue_size=10)
+    pub.publish(float(x),float(y),float(z))
+
 def doAction(voice_command):
-    command = voice_command.data.lower()
+    
+    command = set(voice_command.data.lower().split())
 
-    if command in {'wave', 'goodbye'}:
+    rospy.loginfo("I heard %s",command)
+
+    if not set(['wave', 'goodbye', 'waving']).isdisjoint(command):
         wave()
-    elif command in {"stop"}:
+    elif command in set(["stop"]).isdisjoint(command):
         resting()
-    elif command in {"pick up"}:
-        x=0
-        y=0.2
-        z=0.45
-        pub = rospy.Publisher('arm_coordinate', Point, queue_size=10)
-        pub.publish(float(x),float(y),float(z))
+    elif command in set(["pick up","carry", "pick"]).isdisjoint(command):
+        pickup()
+        
 
-def listener()
+def listener():
+    rospy.loginfo("listening1")
     rospy.Subscriber("grammar_data", String, doAction)
     rospy.spin()
 
