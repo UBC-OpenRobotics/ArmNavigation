@@ -4,4 +4,11 @@
 
     <include file="$(find turtlebot_arm_bringup)/launch/arm.launch" pass_all_args="true"/>
     <include file="$(find turtlebot_arm_moveit_config)/launch/move_group.launch"/>
+
+    <node pkg="arm_nav" type="coordinate_arm_manual.py" name="coordinate_arm_listener"/>
+    <node pkg="arm_nav" type="coordinate_arm_nav.py" name="coordinate_arm_talker"/>
+
+    <include file="$(find ros_test)/launch/asr_lm2.launch"/>
+    
+
 </launch>
