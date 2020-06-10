@@ -7,6 +7,8 @@
 
     <node pkg="arm_nav" type="coordinate_arm_manual.py" name="coordinate_arm_listener"/>
     <node pkg="arm_nav" type="coordinate_arm_nav.py" name="coordinate_arm_talker"/>
+    <node pkg="arm_nav" type="voice_command_arm_nav.py" name="arm_voice_command"/>
+    <node pkg="arm_nav" type="gripper_cmd.py" name="gripper_controllette"/>
 
     <include file="$(find ros_test)/launch/asr_lm2.launch"/>
     

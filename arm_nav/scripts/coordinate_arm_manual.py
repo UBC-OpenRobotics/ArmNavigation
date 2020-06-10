@@ -2,6 +2,7 @@
 import rospy
 import Tkinter as tk
 from geometry_msgs.msg import Point
+from std_msgs.msg import String
 
 root= tk.Tk()
 
@@ -31,10 +32,7 @@ entry3 = tk.Entry (root)
 canvas1.create_window(200, 230, window=entry3)
     
 def talker(x, y, z):
-
-    
     pub = rospy.Publisher('arm_coordinate', Point, queue_size=10)
-    rospy.init_node('arm_coordinate_talker', anonymous=True)
     rate = rospy.Rate(10) # 10hz
 
     while not rospy.is_shutdown():
@@ -59,9 +57,31 @@ def getCoordinate ():
 button1 = tk.Button(text='Go to Point', command=getCoordinate)
 canvas1.create_window(200, 270, window=button1)
 
+def OpenGripper():
+    pub1 = rospy.Publisher('gripper_state', String, queue_size=10)
+    pub1.publish("open")
+
+button2 = tk.Button(text='Open', command=OpenGripper)
+canvas1.create_window(100, 330, window=button2)
+
+def CloseGripper():
+    pub1 = rospy.Publisher('gripper_state', String, queue_size=10)
+    pub1.publish("close")
+
+button3 = tk.Button(text='Close', command=CloseGripper)
+canvas1.create_window(200, 330, window=button3)
+
+def NeutralGripper():
+    pub1 = rospy.Publisher('gripper_state', String, queue_size=10)
+    pub1.publish("neutral")
+
+button4 = tk.Button(text='Neutral', command=NeutralGripper)
+canvas1.create_window(300, 330, window=button4)
+
 if __name__ == '__main__':
-    
+
     try:
+        rospy.init_node('arm_coordinate_manual', anonymous=True)
         root.mainloop()
     except rospy.ROSInterruptException:
         pass
