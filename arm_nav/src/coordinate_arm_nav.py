@@ -48,7 +48,7 @@ def goToPoint(Coord):
     wpose.position.z += 0.1
     waypoints.append(deepcopy(wpose))
     '''
-    #Setting and going to set pose
+    #Move to pick up
     arm.set_pose_target(target_pose, end_effector_link)
     arm.go()
 
@@ -58,6 +58,16 @@ def goToPoint(Coord):
     target_pose.pose.position.x = Coord.x
     target_pose.pose.position.y = Coord.y
     target_pose.pose.position.z = Coord.z
+
+    arm.set_pose_target(target_pose, end_effector_link)
+    arm.go()
+
+    target_pose = PoseStamped()
+    target_pose.header.frame_id = reference_frame
+    target_pose.header.stamp = rospy.Time.now()
+    target_pose.pose.position.x = Coord.x
+    target_pose.pose.position.y = Coord.y + 0.1
+    target_pose.pose.position.z = Coord.z +0.1
 
     arm.set_pose_target(target_pose, end_effector_link)
     arm.go()

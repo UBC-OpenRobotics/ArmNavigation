@@ -8,42 +8,32 @@ from geometry_msgs.msg import PoseStamped, Pose, Point
 from std_msgs.msg import String
 from tf.transformations import euler_from_quaternion, quaternion_from_euler
 
-def wave():
-    # Start the arm in the "resting" pose stored in the SRDF file
-    arm.set_named_target('wave_1')
-    arm.go()
-    arm.set_named_target('wave_2')
-    arm.go()
-
-def resting():
-    # Start the arm in the "resting" pose stored in the SRDF file
-    arm.set_named_target('resting')
-    arm.go()
-
+'''
 def pickup():
     x=0
     y=0.2
-    z=0.45
+    z=0.35
     pub = rospy.Publisher('arm_coordinate', Point, queue_size=10)
     pub.publish(float(x),float(y),float(z))
+'''
 
 def doAction(voice_command):
+
+    pub = rospy.Publisher('arm_pose', String, queue_size=10)
     
     command = set(voice_command.data.lower().split())
 
     rospy.loginfo("I heard %s",command)
 
     if not set(['wave', 'goodbye', 'waving']).isdisjoint(command):
-        wave()
-    elif not set(["stop"]).isdisjoint(command):
-        resting()
-    elif not set(["pick up","carry", "pick","grab"]).isdisjoint(command):
-        print("hold")
-        pickup()
+        pub.publish("wave")
+    elif not set(["stop","resting"]).isdisjoint(command):
+        pub.publish("stop")
+    elif not set(["serve","handoff","pick up","carry", "pick","grab"]).isdisjoint(command):
+        pub.publish("pick up")
         
 
 def listener():
-    rospy.loginfo("listening1")
     rospy.Subscriber("grammar_data", String, doAction)
     rospy.spin()
 
@@ -53,7 +43,8 @@ if __name__ == '__main__':
     moveit_commander.roscpp_initialize(sys.argv)
         
     rospy.init_node('arm_voice_command')
-                
+
+    '''                
     # Initialize the move group for the right arm
     arm = moveit_commander.MoveGroupCommander('arm')
 
@@ -63,5 +54,6 @@ if __name__ == '__main__':
     # Allow some leeway in position (meters) and orientation (radians)
     arm.set_goal_position_tolerance(0.001)
     arm.set_goal_orientation_tolerance(0.005)
-        
+    '''
+    
     listener()

@@ -46,6 +46,25 @@
         <joint name="arm_wrist_flex_joint" value="0.5" />
     </group_state>
     
+    <group_state name="grab" group="arm">
+        <joint name="arm_elbow_flex_joint" value="-0.52"/>
+        <joint name="arm_shoulder_lift_joint" value="1.7"/>
+        <joint name="arm_shoulder_pan_joint" value="1.45"/>
+        <joint name="arm_wrist_flex_joint" value="-0.71"/>
+    </group_state>
+    <group_state name="carry" group="arm">
+        <joint name="arm_elbow_flex_joint" value="-0.52"/>
+        <joint name="arm_shoulder_lift_joint" value="2"/>
+        <joint name="arm_shoulder_pan_joint" value="-2.6"/>
+        <joint name="arm_wrist_flex_joint" value="-1.1"/>
+    </group_state>
+    <group_state name="dropoff" group="arm">
+        <joint name="arm_elbow_flex_joint" value="0.52"/>
+        <joint name="arm_shoulder_lift_joint" value="1.7"/>
+        <joint name="arm_shoulder_pan_joint" value="1.45"/>
+        <joint name="arm_wrist_flex_joint" value="1.2"/>
+    </group_state>
+        
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
     <end_effector name="gripper" parent_link="gripper_link" group="gripper" parent_group="arm" />
     <!--PASSIVE JOINT: Purpose: this element is used to mark joints that are not actuated-->
