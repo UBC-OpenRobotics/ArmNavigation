@@ -30,19 +30,19 @@
     <group_state name="resting" group="arm">
         <joint name="arm_elbow_flex_joint" value="2.3" />
         <joint name="arm_shoulder_lift_joint" value="-2" />
-        <joint name="arm_shoulder_pan_joint" value="0" />
+        <joint name="arm_shoulder_pan_joint" value="1.507" />
         <joint name="arm_wrist_flex_joint" value="1.4" />
     </group_state>
     <group_state name="wave_1" group="arm">
         <joint name="arm_elbow_flex_joint" value="0.55" />
         <joint name="arm_shoulder_lift_joint" value="-0.72" />
-        <joint name="arm_shoulder_pan_joint" value="-1.6" />
+        <joint name="arm_shoulder_pan_joint" value="0" />
         <joint name="arm_wrist_flex_joint" value="-0.5" />
     </group_state>
     <group_state name="wave_2" group="arm">
         <joint name="arm_elbow_flex_joint" value="-0.55" />
         <joint name="arm_shoulder_lift_joint" value="0.72" />
-        <joint name="arm_shoulder_pan_joint" value="-1.6" />
+        <joint name="arm_shoulder_pan_joint" value="0" />
         <joint name="arm_wrist_flex_joint" value="0.5" />
     </group_state>
     
@@ -54,13 +54,13 @@
     </group_state>
     <group_state name="carry" group="arm">
         <joint name="arm_elbow_flex_joint" value="-0.52"/>
-        <joint name="arm_shoulder_lift_joint" value="2"/>
-        <joint name="arm_shoulder_pan_joint" value="-2.6"/>
-        <joint name="arm_wrist_flex_joint" value="-1.1"/>
+        <joint name="arm_shoulder_lift_joint" value="1.4"/>
+        <joint name="arm_shoulder_pan_joint" value="-0.5"/>
+        <joint name="arm_wrist_flex_joint" value="-0.2"/>
     </group_state>
     <group_state name="dropoff" group="arm">
         <joint name="arm_elbow_flex_joint" value="0.52"/>
-        <joint name="arm_shoulder_lift_joint" value="1.7"/>
+        <joint name="arm_shoulder_lift_joint" value="1.05"/>
         <joint name="arm_shoulder_pan_joint" value="1.45"/>
         <joint name="arm_wrist_flex_joint" value="1.2"/>
     </group_state>
@@ -232,7 +232,6 @@
     <disable_collisions link1="arm_shoulder_pan_link" link2="gripper_static_link" reason="Never" />
     <disable_collisions link1="arm_wrist_F3_0_link" link2="arm_wrist_flex_link" reason="Adjacent" />
     <disable_collisions link1="arm_wrist_F3_0_link" link2="arm_wrist_flex_servo_link" reason="Never" />
-    <disable_collisions link1="arm_wrist_F3_0_link" link2="gripper_active_finger_link" reason="Never" />
     <disable_collisions link1="arm_wrist_F3_0_link" link2="gripper_active_link" reason="Default" />
     <disable_collisions link1="arm_wrist_F3_0_link" link2="gripper_servo_link" reason="Adjacent" />
     <disable_collisions link1="arm_wrist_F3_0_link" link2="gripper_static_finger_link" reason="Default" />
@@ -256,4 +255,6 @@
     <disable_collisions link1="gripper_servo_link" link2="gripper_static_finger_link" reason="Default" />
     <disable_collisions link1="gripper_servo_link" link2="gripper_static_link" reason="Adjacent" />
     <disable_collisions link1="gripper_static_finger_link" link2="gripper_static_link" reason="Adjacent" />
+    <!--<disable_collisions link1="gripper_active_finger_link" link2="arm_wrist_flex_link" reason="Adjacent" />
+    <disable_collisions link1="gripper_active_finger_link" link2="arm_wrist_F3_0_link" reason="Adjacent" />-->
 </robot>

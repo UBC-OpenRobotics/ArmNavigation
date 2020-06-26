@@ -22,25 +22,38 @@ def resting():
 
 def carry():
     # Start the arm in the "resting" pose stored in the SRDF file
+    gripperPose("open")
     arm.set_named_target('grab')
     arm.go()
-    rospy.sleep(4)
+    rospy.sleep(5)
+    gripperPose("close")
+    rospy.sleep(3)
+    gripperPose("pseudo closed")
+    rospy.sleep(1)
     arm.set_named_target('carry')
     arm.go()
-    rospy.sleep(2)
 
 def dropoff():
     arm.set_named_target('grab')
     arm.go()
-    rospy.sleep(2)
+    rospy.sleep(1)
     arm.set_named_target('dropoff')
     arm.go()
-    rospy.sleep(2)
+    gripperPose("open")
+    arm.set_named_target('resting')
+    arm.go()
+    
+
+def gripperPose(gripperstate):
+    pub = rospy.Publisher('gripper_state', String, queue_size=10)
+    pub.publish(gripperstate)
 
 def pose(pose_command):
     pose = pose_command.data
 
     rospy.loginfo("I heard %s",pose)
+
+    gripperPose("pseudo closed")
 
     if pose == "wave":
         wave()

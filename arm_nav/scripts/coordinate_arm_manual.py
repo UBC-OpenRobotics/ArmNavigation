@@ -2,7 +2,7 @@
 import rospy
 import Tkinter as tk
 from geometry_msgs.msg import Point
-from std_msgs.msg import String
+from std_msgs.msg import String, Float64
 
 root= tk.Tk()
 
