@@ -45,26 +45,31 @@
         <joint name="arm_shoulder_pan_joint" value="0" />
         <joint name="arm_wrist_flex_joint" value="0.5" />
     </group_state>
-    
     <group_state name="grab" group="arm">
-        <joint name="arm_elbow_flex_joint" value="-0.52"/>
-        <joint name="arm_shoulder_lift_joint" value="1.7"/>
-        <joint name="arm_shoulder_pan_joint" value="1.45"/>
-        <joint name="arm_wrist_flex_joint" value="-0.71"/>
+        <joint name="arm_elbow_flex_joint" value="-0.52" />
+        <joint name="arm_shoulder_lift_joint" value="1.7" />
+        <joint name="arm_shoulder_pan_joint" value="1.45" />
+        <joint name="arm_wrist_flex_joint" value="-0.71" />
     </group_state>
     <group_state name="carry" group="arm">
-        <joint name="arm_elbow_flex_joint" value="-0.52"/>
-        <joint name="arm_shoulder_lift_joint" value="1.4"/>
-        <joint name="arm_shoulder_pan_joint" value="-0.5"/>
-        <joint name="arm_wrist_flex_joint" value="-0.2"/>
+        <joint name="arm_elbow_flex_joint" value="-0.52" />
+        <joint name="arm_shoulder_lift_joint" value="1.4" />
+        <joint name="arm_shoulder_pan_joint" value="-0.5" />
+        <joint name="arm_wrist_flex_joint" value="-0.2" />
     </group_state>
     <group_state name="dropoff" group="arm">
-        <joint name="arm_elbow_flex_joint" value="0.52"/>
-        <joint name="arm_shoulder_lift_joint" value="1.05"/>
-        <joint name="arm_shoulder_pan_joint" value="1.45"/>
-        <joint name="arm_wrist_flex_joint" value="1.2"/>
+        <joint name="arm_elbow_flex_joint" value="0.52" />
+        <joint name="arm_shoulder_lift_joint" value="1.05" />
+        <joint name="arm_shoulder_pan_joint" value="1.45" />
+        <joint name="arm_wrist_flex_joint" value="1.2" />
     </group_state>
-        
+    <group_state name="grab_mask" group="arm">
+        <joint name="arm_elbow_flex_joint" value="1.8118" />
+        <joint name="arm_shoulder_lift_joint" value="-0.7765" />
+        <joint name="arm_shoulder_pan_joint" value="-0.8052" />
+        <joint name="arm_wrist_flex_joint" value="0.441" />
+        <joint name="gripper_link_joint" value="0" />
+    </group_state>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
     <end_effector name="gripper" parent_link="gripper_link" group="gripper" parent_group="arm" />
     <!--PASSIVE JOINT: Purpose: this element is used to mark joints that are not actuated-->
@@ -255,6 +260,4 @@
     <disable_collisions link1="gripper_servo_link" link2="gripper_static_finger_link" reason="Default" />
     <disable_collisions link1="gripper_servo_link" link2="gripper_static_link" reason="Adjacent" />
     <disable_collisions link1="gripper_static_finger_link" link2="gripper_static_link" reason="Adjacent" />
-    <!--<disable_collisions link1="gripper_active_finger_link" link2="arm_wrist_flex_link" reason="Adjacent" />
-    <disable_collisions link1="gripper_active_finger_link" link2="arm_wrist_F3_0_link" reason="Adjacent" />-->
 </robot>

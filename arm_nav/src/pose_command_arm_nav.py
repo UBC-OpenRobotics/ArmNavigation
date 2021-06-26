@@ -36,11 +36,24 @@ def carry():
 def dropoff():
     arm.set_named_target('grab')
     arm.go()
-    rospy.sleep(1)
+    rospy.sleep(3)
     arm.set_named_target('dropoff')
     arm.go()
     gripperPose("open")
     arm.set_named_target('resting')
+    arm.go()
+    
+def grab_mask():
+    # Start the arm in the "resting" pose stored in the SRDF file
+    gripperPose("open")
+    arm.set_named_target('grab_mask')
+    arm.go()
+    rospy.sleep(5)
+    gripperPose("close")
+    rospy.sleep(3)
+    gripperPose("pseudo closed")
+    rospy.sleep(1)
+    arm.set_named_target('grab')
     arm.go()
     
 
@@ -63,6 +76,8 @@ def pose(pose_command):
         carry()
     elif pose == "drop off":
         dropoff()
+    elif pose == "grab mask":
+        grab_mask()
     
 
 def listener():
